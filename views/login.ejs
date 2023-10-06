@@ -1,0 +1,18 @@
+<% layout('layout') %> <% block('pageTitle', 'Login') %> <% block('body') %>
+<div class="login-form">
+  <h2>Login to Your Account</h2>
+  <form action="/auth/login" method="POST">
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required />
+    </div>
+    <div class="form-group">
+      <button type="submit">Login</button>
+    </div>
+  </form>
+</div>
+<% endblock %>

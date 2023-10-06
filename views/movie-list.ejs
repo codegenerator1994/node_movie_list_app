@@ -1,0 +1,86 @@
+<% layout('layout') %> <% block('pageTitle', 'My Favorite Movies') %> <%
+block('body') %>
+<div class="movie-list">
+  <h2>My Favorite Movies</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Movie Name</th>
+        <th>Rating</th>
+        <th>Cast</th>
+        <th>Genre</th>
+        <th>Release Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% movies.forEach(movie => { %>
+      <tr>
+        <td><%= movie.name %></td>
+        <td><%= movie.rating %></td>
+        <td><%= movie.cast.join(', ') %></td>
+        <td><%= movie.genre %></td>
+        <td>
+          <%= movie.releaseDate ? movie.releaseDate.toLocaleDateString() : 'N/A'
+          %>
+        </td>
+        <td>
+          <a href="/movies/<%= movie.id %>/edit">Edit</a>
+          <form
+            action="/movies/<%= movie.id %>"
+            method="POST"
+            class="delete-form"
+          >
+            <input type="hidden" name="_method" value="DELETE" />
+            <button type="submit" class="delete-button">Delete</button>
+          </form>
+        </td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</div>
+
+<div class="add-movie-form">
+  <h3>Add New Movie</h3>
+  <form action="/movies" method="POST">
+    <div class="form-group">
+      <label for="name">Movie Name:</label>
+      <input type="text" id="name" name="name" required />
+    </div>
+    <div class="form-group">
+      <label for="rating">Rating:</label>
+      <input type="number" id="rating" name="rating" required />
+    </div>
+    <div class="form-group">
+      <label for="cast">Cast (comma-separated):</label>
+      <input type="text" id="cast" name="cast" />
+    </div>
+    <div class="form-group">
+      <label for="genre">Genre:</label>
+      <input type="text" id="genre" name="genre" required />
+    </div>
+    <div class="form-group">
+      <label for="releaseDate">Release Date:</label>
+      <input type="date" id="releaseDate" name="releaseDate" />
+    </div>
+    <div class="form-group">
+      <button type="submit">Add Movie</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  const deleteForms = document.querySelectorAll(".delete-form");
+  deleteForms.forEach((form) => {
+    form.addEventListener("submit", (e) => {
+      const confirmDelete = confirm(
+        "Are you sure you want to delete this movie?"
+      );
+      if (!confirmDelete) {
+        e.preventDefault();
+      }
+    });
+  });
+</script>
+<% endblock %>
