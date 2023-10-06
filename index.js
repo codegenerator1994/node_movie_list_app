@@ -14,10 +14,10 @@ db.authenticate()
 
 app.use(express.static("public"));
 
-app.use(expressLayouts);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-app.set("layout", "./views/layout");
+app.use(expressLayouts);
+app.set("layout", "layout");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
