@@ -2,17 +2,23 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const session = require("express-session");
-const passport = require("passport");
+const passport = require("./config/passport");
 const flash = require("connect-flash");
 const db = require("./config/database");
-
-require("./config/passport")(passport);
+const path = require("path");
+const expressLayouts = require("express-ejs-layouts");
 
 db.authenticate()
   .then(() => console.log("Database connected"))
   .catch((err) => console.error("Error: " + err));
 
+app.use(express.static("public"));
+
+app.use(expressLayouts);
 app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+app.set("layout", "./views/layout");
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(
