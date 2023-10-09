@@ -1,4 +1,4 @@
-<% layout('layout') %> <% block('pageTitle', 'Login') %> <% block('body') %>
+<%- contentFor('pageTitle') %> Login <%- contentFor('body') %>
 <div class="login-form">
   <h2>Login to Your Account</h2>
   <form action="/auth/login" method="POST">
@@ -15,4 +15,3 @@
     </div>
   </form>
 </div>
-<% endblock %>

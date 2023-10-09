@@ -30,7 +30,7 @@ module.exports = {
       });
   },
 
-  loginUser: (req, res) => {
+  loginUser: (req, res, next) => {
     passport.authenticate("local", {
       successRedirect: "/movies",
       failureRedirect: "/login",

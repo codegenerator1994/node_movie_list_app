@@ -1,5 +1,4 @@
-<% layout('layout') %> <% block('pageTitle', 'My Favorite Movies') %> <%
-block('body') %>
+<%- contentFor('pageTitle') %> My Favorite Movies <%- contentFor('body') %>
 <div class="movie-list">
   <h2>My Favorite Movies</h2>
   <table>
@@ -83,4 +82,3 @@ block('body') %>
     });
   });
 </script>
-<% endblock %>
