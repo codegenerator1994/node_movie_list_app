@@ -12,12 +12,11 @@ db.authenticate()
   .then(() => console.log("Database connected"))
   .catch((err) => console.error("Error: " + err));
 
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 app.use(expressLayouts);
-app.set("layout", "layout");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
