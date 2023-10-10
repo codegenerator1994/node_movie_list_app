@@ -69,6 +69,7 @@ module.exports = {
   updateMovie: (req, res) => {
     const movieId = req.params.id;
     const { name, rating, cast, genre, releaseDate } = req.body;
+    console.log(name, rating,cast,genre,releaseDate);
 
     Movie.findByPk(movieId)
       .then((movie) => {
@@ -101,7 +102,7 @@ module.exports = {
 
   deleteMovie: (req, res) => {
     const movieId = req.params.id;
-
+    console.log(1);
     Movie.findByPk(movieId)
       .then((movie) => {
         if (!movie) {

@@ -17,17 +17,17 @@
       <tr>
         <td><%= movie.name %></td>
         <td><%= movie.rating %></td>
-        <td><%= movie.cast.join(', ') %></td>
+        <td><%= movie.cast%></td>
         <td><%= movie.genre %></td>
         <td>
-          <%= movie.releaseDate ? movie.releaseDate.toLocaleDateString() : 'N/A'
+          <%= movie.releaseDate
           %>
         </td>
         <td>
           <a href="/movies/<%= movie.id %>/edit">Edit</a>
           <form
             action="/movies/<%= movie.id %>"
-            method="POST"
+            method="DELETE"
             class="delete-form"
           >
             <input type="hidden" name="_method" value="DELETE" />
@@ -71,6 +71,7 @@
 
 <script>
   const deleteForms = document.querySelectorAll(".delete-form");
+  
   deleteForms.forEach((form) => {
     form.addEventListener("submit", (e) => {
       const confirmDelete = confirm(

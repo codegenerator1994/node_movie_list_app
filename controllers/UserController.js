@@ -9,17 +9,17 @@ module.exports = {
       .then((existingUser) => {
         if (existingUser) {
           req.flash("error_msg", "Email is already registered");
-          res.redirect("/register");
+          res.redirect("/auth/register");
         } else {
           User.create({ email, password })
             .then((user) => {
               req.flash("success_msg", "You are now registered and can log in");
-              res.redirect("/login");
+              res.redirect("/auth/login");
             })
             .catch((err) => {
               console.error("Error registering user:", err);
               req.flash("error_msg", "Registration failed");
-              res.redirect("/register");
+              res.redirect("/auth/register");
             });
         }
       })
@@ -35,7 +35,8 @@ module.exports = {
       successRedirect: "/movies",
       failureRedirect: "/login",
       failureFlash: true,
-    })(req, res);
+    })(req, res, () => {
+    });
   },
 
   logoutUser: (req, res) => {
